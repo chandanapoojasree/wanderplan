@@ -1,0 +1,110 @@
+type UserProfile = 
+ record {
+   createdAt: Timestamp;
+   displayName: text;
+   userId: UserId;
+ };
+type UserId = principal;
+type UpdateActivityInput = 
+ record {
+   activityId: ActivityId;
+   dayNumber: nat;
+   description: text;
+   durationMinutes: nat;
+   time: text;
+   title: text;
+   tripId: TripId;
+ };
+type TripStatus = 
+ variant {
+   completed;
+   ongoing;
+   planned;
+ };
+type TripId = nat;
+type Trip = 
+ record {
+   budget: nat;
+   createdAt: Timestamp;
+   destinationId: DestinationId;
+   endDate: text;
+   id: TripId;
+   interests: vec text;
+   itinerary: vec ItineraryDay;
+   name: text;
+   startDate: text;
+   status: TripStatus;
+   userId: UserId;
+ };
+type Timestamp = int;
+type ItineraryDay = 
+ record {
+   activities: vec Activity;
+   date: text;
+   dayNumber: nat;
+ };
+type DestinationId = nat;
+type DestinationFilter = 
+ record {
+   maxBudget: opt nat;
+   minBudget: opt nat;
+   minRating: opt float64;
+   tags: vec text;
+ };
+type Destination = 
+ record {
+   activities: vec text;
+   country: text;
+   description: text;
+   estimatedDailyBudget: nat;
+   id: DestinationId;
+   imageUrl: text;
+   name: text;
+   rating: float64;
+   tags: vec text;
+ };
+type CreateTripInput = 
+ record {
+   budget: nat;
+   destinationId: DestinationId;
+   endDate: text;
+   interests: vec text;
+   name: text;
+   startDate: text;
+ };
+type AddActivityInput = 
+ record {
+   date: text;
+   dayNumber: nat;
+   description: text;
+   durationMinutes: nat;
+   time: text;
+   title: text;
+   tripId: TripId;
+ };
+type ActivityId = nat;
+type Activity = 
+ record {
+   description: text;
+   durationMinutes: nat;
+   id: ActivityId;
+   time: text;
+   title: text;
+ };
+service : {
+  addActivity: (input: AddActivityInput) -> (bool);
+  createTrip: (input: CreateTripInput) -> (Trip);
+  deleteTrip: (tripId: TripId) -> (bool);
+  filterDestinations: (filter: DestinationFilter) -> (vec Destination) query;
+  getDestination: (id: DestinationId) -> (opt Destination) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getOrCreateProfile: () -> (UserProfile);
+  getTrip: (tripId: TripId) -> (opt Trip) query;
+  listDestinations: () -> (vec Destination) query;
+  listMyTrips: () -> (vec Trip) query;
+  removeActivity: (tripId: TripId, dayNumber: nat, activityId: ActivityId) ->
+   (bool);
+  updateActivity: (input: UpdateActivityInput) -> (bool);
+  updateDisplayName: (displayName: text) -> (bool);
+  updateTripStatus: (tripId: TripId, status: TripStatus) -> (bool);
+}

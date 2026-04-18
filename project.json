@@ -1,0 +1,22 @@
+{
+  "overview": "A web-based travel planning platform where users discover destinations, build day-wise itineraries, and manage saved trips — all from one clean, personalized dashboard.",
+  "features": [
+    "User accounts with Internet Identity login",
+    "Searchable destination catalog with filters by location, budget, and rating",
+    "Trip creation with dates, budget, and travel interests",
+    "Day-by-day itinerary builder with add/edit activities",
+    "Personalized dashboard showing saved trips and upcoming travel",
+    "Destination detail pages with activities and estimated budgets",
+    "Fully responsive design for mobile, tablet, and desktop"
+  ],
+  "category": "productivity",
+  "tags": [
+    "travel",
+    "itinerary",
+    "trip-planning",
+    "destinations",
+    "dashboard",
+    "travel-guide"
+  ],
+  "last_updated": "2026-04-18T03:17:02.249Z"
+}
